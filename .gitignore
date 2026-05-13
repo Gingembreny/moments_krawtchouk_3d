@@ -1,0 +1,19 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.mplconfig/
+
+# Large local data folders
+dataset_original/
+dataset_genere/
+results/features_*/
+
+# Large generated arrays and models
+*.npy
+*.npz
+*.pt
+*.pth
+
+# Runtime logs
+*.log
