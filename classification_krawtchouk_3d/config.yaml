@@ -1,0 +1,107 @@
+# Configuration générale du projet
+# Le dossier dataset_original doit contenir les dossiers de classes McGill : airplanesIm, antsIm, etc.
+
+dossier_dataset_original: dataset_original
+dossier_dataset_genere: dataset_genere
+dossier_resultats: results
+
+taille_volume: 128
+padding_generation: 16
+
+# Ordres utilisés dans l'article
+ordres_classification: [4, 6, 8, 10, 12, 14, 16, 18, 20]
+ordres_reconstruction: [8, 16, 20, 64, 127]
+ordres_object_cv: [4, 5, 6, 7, 8, 9, 10]
+ordres_grouped_augmentation: [4, 5, 6, 7, 8, 9, 10]
+
+# True object-level generalization experiment: use all original objects,
+# split objects inside each class with stratified 5-fold CV, no augmentation.
+classes_object_cv:
+  - airplanesIm
+  - antsIm
+  - birdsIm
+  - chairsIm
+  - crabsIm
+  - cupsIm
+  - dinosaursIm
+  - dolphinsIm
+  - fourIm
+  - spectaclesIm
+  - spidersIm
+  - tablesIm
+  - teddyIm
+
+# D1 de l'article : 10 classes, 1 objet source par classe, 320 objets générés par classe
+classes_D1:
+  - airplanesIm
+  - antsIm
+  - birdsIm
+  - chairsIm
+  - crabsIm
+  - cupsIm
+  - dinosaursIm
+  - dolphinsIm
+  - spectaclesIm
+  - fourIm
+
+# D2 de l'article : attention, il faut avoir ces classes dans dataset_original
+classes_D2:
+  - airplanesIm
+  - antsIm
+  - chairsIm
+  - crabsIm
+  - cupsIm
+  - dinosaursIm
+  - spectaclesIm
+  - spidersIm
+  - tablesIm
+  - teddyIm
+
+# Transformations D1
+facteurs_echelle_D1: [0.7, 0.8, 0.9, 1.0, 1.1]
+angles_rotation_D1: [0, 30, 60, 90]
+
+# Transformations D2
+translations_D2:
+  - [-4, -4, -4]
+  - [-2, -2, -2]
+  - [2, 2, 2]
+  - [4, 4, 4]
+angles_rotation_D2: [0, 30, 60, 90]
+facteurs_echelle_D2: [0.7, 0.8, 0.9, 1.1]
+
+# Bruits de l'article
+bruit_salt_pepper: [0.01, 0.03, 0.05, 0.10, 0.20]
+bruit_speckle_sigma: [0.3, 0.5, 0.7]
+
+# Entraînement DNN
+entrainement:
+  epochs: 80
+  batch_size: 64
+  learning_rate: 0.001
+  dropout: 0.15
+  patience: 12
+  seed: 42
+
+# Résultats Tchebichef reportés dans l'article, pour comparaison
+article_D1_tchebichef_accuracy:
+  4: 98.90
+  6: 99.16
+  8: 98.80
+  10: 97.91
+  12: 95.93
+  14: 94.06
+  16: 91.19
+  18: 87.81
+  20: 85.52
+
+article_D2_tchebichef_5fold_accuracy:
+  4: 99.15
+  6: 98.57
+  8: 97.95
+  10: 98.13
+  12: 97.33
+  14: 97.46
+  16: 96.64
+  18: 95.04
+  20: 95.42
