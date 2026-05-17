@@ -1,0 +1,21 @@
+flowchart LR
+    A["Dataset McGill<br/>10 classes D1<br/>tous les objets"] --> B["Prétraitement<br/>centrage + padding<br/>128^3 -> 160^3"]
+
+    B --> C["Augmentation modérée<br/>16 transformations<br/>par objet"]
+
+    C --> D["Extraction des moments<br/>3D de Krawtchouk<br/>ordres 4 à 10"]
+
+    D --> E["5-fold CV<br/>au niveau des objets"]
+
+    E --> F["Objets train<br/>4 folds"]
+    E --> G["Objets test<br/>1 fold séparé"]
+
+    F --> H["Sous-split des objets train<br/>80 % apprentissage<br/>20 % validation<br/>par groupes d'objets"]
+    H --> I["Entraînement DNN<br/>sur objets d'apprentissage"]
+    H --> V["Sélection du modèle<br/>validation loss minimale"]
+
+    I --> V
+    V --> J["Évaluation finale<br/>sur objets test"]
+    G --> J
+
+    J --> K["Résultats<br/>accuracy par ordre<br/>confusions + exemples visuels"]

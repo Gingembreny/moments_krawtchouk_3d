@@ -207,6 +207,16 @@ def main():
     )
     dolphins_df = pd.concat([dolphins_correct, dolphins_wrong], ignore_index=True)
 
+    four_correct = choisir_un_par_objet(
+        data[(data["classe_reelle"] == "fourIm") & data["correct"]],
+        4,
+    )
+    four_wrong = choisir_un_par_objet(
+        data[(data["classe_reelle"] == "fourIm") & ~data["correct"]],
+        4,
+    )
+    four_df = pd.concat([four_correct, four_wrong], ignore_index=True)
+
     sauvegarder_grille_echantillons(
         bons_df,
         sortie / f"good_classes_order_{ordre:03d}.png",
@@ -232,6 +242,13 @@ def main():
         dolphins_df,
         sortie / f"dolphins_correct_vs_wrong_order_{ordre:03d}.png",
         f"Dolphins : corrects puis erreurs — ordre {ordre}",
+        taille,
+        padding,
+    )
+    sauvegarder_grille_echantillons(
+        four_df,
+        sortie / f"four_correct_vs_wrong_order_{ordre:03d}.png",
+        f"Fours : corrects puis erreurs — ordre {ordre}",
         taille,
         padding,
     )
